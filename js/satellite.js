@@ -26,33 +26,20 @@ function initSatelliteView(planetName) {
     }
     const attackBtn = document.getElementById('satellite-attack-btn');
     if (attackBtn) {
+        attackBtn.innerText = 'ATTACK ON PLANET';
         attackBtn.style.display = 'inline-block';
     }
 
-    // AR Button (Mars & Earth)
+    // AR is only available on the main solar-system page.
     const arBtn = document.getElementById('satellite-ar-btn');
     if (arBtn) {
-        if (planetName === 'Mars') {
-            arBtn.style.display = 'inline-block';
-            arBtn.innerText = "SEE MARS IN AR 🥽";
-            arBtn.onclick = function () { window.open('https://mywebar.com/p/Project_0_wz39uz9oo2', '_blank'); };
-        } else if (planetName === 'Earth') {
-            arBtn.style.display = 'inline-block';
-            arBtn.innerText = "SEE EARTH IN AR 🥽";
-            arBtn.onclick = function () { window.open('https://mywebar.com/p/Project_1_jrscealzw', '_blank'); };
-        } else {
-            arBtn.style.display = 'none';
-        }
+        arBtn.style.display = 'none';
     }
 
-    // Satellite AR Button (Earth Only)
+    // Satellite AR is also hidden outside the main page.
     const satArBtn = document.getElementById('satellite-sat-ar-btn');
     if (satArBtn) {
-        if (planetName === 'Earth') {
-            satArBtn.style.display = 'inline-block';
-        } else {
-            satArBtn.style.display = 'none';
-        }
+        satArBtn.style.display = 'none';
     }
 
     // 1. Scene
@@ -492,4 +479,3 @@ function showMissionResult(planetName, rivalName) {
     }
 }
 
-window.startAttackSequence = startAttackSequence;

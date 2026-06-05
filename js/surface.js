@@ -103,6 +103,7 @@ function initPlanetSurface(planetName) {
     // 7. Inputs
     document.addEventListener('keydown', onKeyDown);
     document.addEventListener('keyup', onKeyUp);
+    createMobileMoveControls();
 
     // 8. Load Hotspots
     loadHotspots(planetName);
@@ -803,6 +804,104 @@ function onKeyUp(event) {
     }
 }
 
+function createMobileMoveControls() {
+    if (document.getElementById('mobile-move-controls')) return;
+    if (!window.matchMedia || !window.matchMedia('(max-width: 700px)').matches) return;
+
+    const controls = document.createElement('div');
+    controls.id = 'mobile-move-controls';
+    controls.style.cssText = `
+        position: fixed;
+        left: 16px;
+        bottom: 78px;
+        z-index: 2500;
+        display: grid;
+        grid-template-columns: 54px 54px 54px;
+        grid-template-rows: 54px 54px 54px;
+        gap: 8px;
+        pointer-events: auto;
+        touch-action: none;
+        user-select: none;
+    `;
+
+    const makeButton = (label, title, activeState) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.innerText = label;
+        btn.title = title;
+        btn.style.cssText = `
+            width: 54px;
+            height: 54px;
+            border: 1px solid rgba(0, 240, 255, 0.9);
+            background: rgba(0, 20, 35, 0.72);
+            color: white;
+            font-size: 20px;
+            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 0 14px rgba(0, 240, 255, 0.28);
+            backdrop-filter: blur(8px);
+            cursor: pointer;
+        `;
+
+        const setActive = (isActive) => {
+            if (activeState === 'forward') moveForward = isActive;
+            if (activeState === 'backward') moveBackward = isActive;
+            if (activeState === 'left') moveLeft = isActive;
+            if (activeState === 'right') moveRight = isActive;
+            btn.style.background = isActive ? 'rgba(0, 240, 255, 0.35)' : 'rgba(0, 20, 35, 0.72)';
+        };
+
+        btn.addEventListener('pointerdown', (event) => {
+            event.preventDefault();
+            btn.setPointerCapture(event.pointerId);
+            setActive(true);
+        });
+
+        const release = (event) => {
+            event.preventDefault();
+            setActive(false);
+        };
+
+        btn.addEventListener('pointerup', release);
+        btn.addEventListener('pointercancel', release);
+        btn.addEventListener('pointerleave', release);
+
+        return btn;
+    };
+
+    const forward = makeButton('↑', 'Move forward', 'forward');
+    const left = makeButton('←', 'Turn left', 'left');
+    const back = makeButton('↓', 'Move backward', 'backward');
+    const right = makeButton('→', 'Turn right', 'right');
+
+    forward.style.gridColumn = '2';
+    forward.style.gridRow = '1';
+    left.style.gridColumn = '1';
+    left.style.gridRow = '2';
+    right.style.gridColumn = '3';
+    right.style.gridRow = '2';
+    back.style.gridColumn = '2';
+    back.style.gridRow = '3';
+
+    controls.appendChild(forward);
+    controls.appendChild(left);
+    controls.appendChild(right);
+    controls.appendChild(back);
+    document.body.appendChild(controls);
+
+    const hint = document.getElementById('controls-hint');
+    if (hint) hint.innerText = 'Use touch controls to move and turn';
+}
+
+function removeMobileMoveControls() {
+    const controls = document.getElementById('mobile-move-controls');
+    if (controls) controls.remove();
+
+    moveForward = false;
+    moveBackward = false;
+    moveLeft = false;
+    moveRight = false;
+}
+
 function animate() {
     animationId = requestAnimationFrame(animate);
 
@@ -942,6 +1041,7 @@ window.stopPlanetSurface = function () {
     document.removeEventListener('keydown', onKeyDown);
     document.removeEventListener('keyup', onKeyUp);
     window.removeEventListener('resize', onWindowResize);
+    removeMobileMoveControls();
     removeDefenseButton(); // Ensure UI is cleaned up
 };
 
@@ -954,7 +1054,7 @@ function createDefenseButton() {
 
     const btn = document.createElement('button');
     btn.id = 'defense-btn';
-    btn.innerText = "🛡️ BUILD DEFENSE SYSTEM"; // More prominent text
+    btn.innerText = "BUILD DEFENSE";
     btn.style.cssText = `
         position: fixed; top: 100px; right: 30px; z-index: 1000;
         padding: 20px 40px; background: linear-gradient(135deg, rgba(255, 69, 0, 0.9), rgba(200, 50, 0, 0.9)); 
@@ -984,10 +1084,8 @@ let defenseParts = [];
 let defenseProgress = 0;
 
 function initDefenseGame() {
-    if (!currentTerrainMesh) {
-        alert("⚠️ CRITICAL: Terrain data still loading. Please wait until the planet surface is fully rendered.");
-        return;
-    }
+    if (document.getElementById('defense-modal')) return;
+
     // Game Modal
     const modal = document.createElement('div');
     modal.id = 'defense-modal';
@@ -1005,7 +1103,7 @@ function initDefenseGame() {
 
     modal.innerHTML = `
         <h1 style="font-size: 60px; margin-bottom: 20px; text-shadow: 0 0 30px #ff4500; font-weight: 900;">ASSEMBLE PLANETARY DEFENSE</h1>
-        <p style="color: white; font-size: 24px; margin-bottom: 60px; text-shadow: 0 2px 5px black;">SEQUENCE: BASE ➔ GUN ➔ CORE</p>
+        <p style="color: white; font-size: 24px; margin-bottom: 60px; text-shadow: 0 2px 5px black;">SEQUENCE: BASE - GUN - CORE</p>
         
         <div style="display: flex; gap: 60px; transform: scale(1.2);">
             <div id="part-base" class="def-part" style="cursor: pointer; text-align: center; transition: transform 0.2s;">
@@ -1107,7 +1205,7 @@ window.assemblePart = function (part) {
 
         setTimeout(() => {
             alert("SYSTEM ONLINE: Turret Constructed.");
-            closeDefenseGame();
+            window.closeDefenseGame();
             spawnTurret();
         }, 500);
     }
@@ -1244,4 +1342,5 @@ function spawnTurret() {
 
 window.createDefenseButton = createDefenseButton;
 window.removeDefenseButton = removeDefenseButton;
+window.removeMobileMoveControls = removeMobileMoveControls;
 

@@ -2817,10 +2817,13 @@ body .panel p {
     width: 100%;
     min-height: 100%;
     overflow: hidden;
+    overscroll-behavior: none;
   }
 
   body {
-    touch-action: manipulation;
+    position: fixed;
+    inset: 0;
+    touch-action: none;
   }
 
   body .logo {
@@ -2840,16 +2843,46 @@ body .panel p {
     border-radius: 50%;
     bottom: -32vw;
     background-size: auto 100% !important;
-    box-shadow: 0 -210px 90px black inset, 0 0 70px 18px rgba(255, 255, 255, 0.22) inset;
+  }
+
+  body .solar_systm .planet.mercury {
+    box-shadow: 0 -150px 72px black inset, 0 0 80px 26px rgba(234, 205, 199, 0.5) inset, 0 -8px 90px rgba(188, 143, 127, 0.65);
+  }
+
+  body .solar_systm .planet.venus {
+    box-shadow: 0 -150px 72px black inset, 0 0 80px 26px #ffcb9c inset, 0 -8px 90px #b85a07;
+  }
+
+  body .solar_systm .planet.earth {
+    box-shadow: 0 -150px 72px black inset, 0 0 80px 26px #8cbaff inset, 0 -8px 90px #2e64c9;
+  }
+
+  body .solar_systm .planet.mars {
+    box-shadow: 0 -150px 72px black inset, 0 0 80px 26px #e86363 inset, 0 -8px 90px #e55f45;
+  }
+
+  body .solar_systm .planet.jupiter {
+    box-shadow: 0 -150px 72px black inset, 0 0 80px 26px rgba(234, 205, 199, 0.65) inset, 0 -8px 90px orange;
+  }
+
+  body .solar_systm .planet.saturn {
+    box-shadow: 0 -150px 72px black inset, 0 0 80px 26px rgba(234, 205, 199, 0.65) inset, 0 -8px 90px #b29d81;
+  }
+
+  body .solar_systm .planet.uranus {
+    box-shadow: 0 -150px 72px black inset, 0 0 80px 26px rgba(141, 205, 216, 0.72) inset, 0 -8px 90px #8dcdd8;
+  }
+
+  body .solar_systm .planet.neptune {
+    box-shadow: 0 -150px 72px black inset, 0 0 80px 26px rgba(79, 131, 226, 0.72) inset, 0 -8px 90px #4f83e2;
+  }
+
+  body .solar_systm .planet.pluto {
+    box-shadow: 0 -150px 72px black inset, 0 0 80px 26px rgba(255, 135, 50, 0.55) inset, 0 -8px 90px #FF8732;
   }
 
   body .overlay {
-    width: 140vw;
-    height: 44vh;
-    left: -20vw;
-    top: -12vh;
-    border-bottom-width: 62vh;
-    box-shadow: 0 -90px 110px 44px black inset;
+    display: none !important;
   }
 
   body label.menu {
@@ -2918,10 +2951,7 @@ body .panel p {
   }
 
   body label.menu h2 {
-    font-size: 8px;
-    letter-spacing: 0;
-    opacity: 0.85;
-    white-space: nowrap;
+    display: none;
   }
 
   body label.menu h2 .pip,
@@ -2929,9 +2959,14 @@ body .panel p {
     display: none;
   }
 
+  body .solar_systm .planet .moon,
+  body .solar_systm .planet .trajectory {
+    display: none !important;
+  }
+
   body .solar_systm .planet_description {
     width: calc(100vw - 32px);
-    top: -34vh;
+    top: -36vh;
     padding: 0 16px;
     box-sizing: border-box;
   }
@@ -2950,22 +2985,18 @@ body .panel p {
 
   body .solar_systm .planet_description p {
     max-width: 360px;
-    margin: 10px auto 8px;
+    margin: 14px auto 10px;
     font-size: 10px;
     line-height: 18px;
     letter-spacing: 1.4px;
   }
 
   body .solar_systm .planet_description a {
-    font-size: 10px;
-    letter-spacing: 2px;
+    display: none !important;
   }
 
   body .solar_systm .planet_description .explore-btn {
-    margin: 10px 0 !important;
-    padding: 9px 16px !important;
-    font-size: 10px !important;
-    letter-spacing: 1.5px !important;
+    display: none !important;
   }
 
   body .read:checked+label {
@@ -3035,6 +3066,10 @@ body .panel p {
     font-size: 12px !important;
     letter-spacing: 1.4px !important;
     box-sizing: border-box;
+  }
+
+  #global-explore-btn {
+    display: block !important;
   }
 
   #satellite-container>div[style*="top:20px"] {
@@ -3120,6 +3155,94 @@ body .panel p {
     max-width: calc(100vw - 24px) !important;
     padding: 16px !important;
     box-sizing: border-box;
+  }
+
+  #defense-btn {
+    top: 116px !important;
+    right: 12px !important;
+    padding: 10px 12px !important;
+    border-width: 2px !important;
+    font-size: 11px !important;
+    letter-spacing: 1px !important;
+    max-width: 150px !important;
+  }
+
+  #defense-modal {
+    padding: 20px 14px !important;
+    box-sizing: border-box !important;
+    overflow: auto !important;
+  }
+
+  #defense-modal h1 {
+    font-size: 28px !important;
+    line-height: 1.12 !important;
+    text-align: center !important;
+    margin-bottom: 12px !important;
+  }
+
+  #defense-modal p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    text-align: center !important;
+    margin-bottom: 26px !important;
+  }
+
+  #defense-modal>div {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    transform: none !important;
+    width: min(100%, 260px) !important;
+  }
+
+  #defense-modal .def-part>div:first-child {
+    width: 100% !important;
+    height: 76px !important;
+    border-width: 2px !important;
+    border-radius: 8px !important;
+  }
+
+  #defense-modal .def-part span {
+    font-size: 24px !important;
+  }
+
+  #defense-modal .def-part>div:last-child {
+    margin-top: 8px !important;
+    font-size: 12px !important;
+  }
+
+  #cancel-defense-btn {
+    margin-top: 24px !important;
+    padding: 12px 24px !important;
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 700px) and (orientation: portrait) {
+  html,
+  body {
+    height: 100%;
+    max-width: 100vw;
+    max-height: 100dvh;
+    overflow: hidden !important;
+  }
+
+  body,
+  body .solar,
+  body .solar_systm,
+  #satellite-container,
+  #surface-container {
+    position: fixed;
+    inset: 0;
+  }
+
+  body .solar {
+    width: 100vw;
+    height: 100dvh;
+  }
+
+  body .panel {
+    position: fixed;
   }
 }
 

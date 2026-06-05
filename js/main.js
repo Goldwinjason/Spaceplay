@@ -185,9 +185,14 @@ function hideSolarInterface() {
     if (logo) logo.style.display = 'none';
 
     if (document.getElementById('global-controls')) document.getElementById('global-controls').style.display = 'none';
+
+    const solarArBtn = document.getElementById('solar-ar-btn');
+    if (solarArBtn) solarArBtn.style.display = 'none';
 }
 
 function restoreSolarInterface() {
+    cleanupSurfaceOnlyControls();
+
     const solar = document.querySelector('.solar');
     if (solar) solar.style.display = '';
 
@@ -198,6 +203,16 @@ function restoreSolarInterface() {
     if (logo) logo.style.display = '';
 
     if (document.getElementById('global-controls')) document.getElementById('global-controls').style.display = 'block';
+
+    const solarArBtn = document.getElementById('solar-ar-btn');
+    if (solarArBtn) solarArBtn.style.display = '';
+}
+
+function cleanupSurfaceOnlyControls() {
+    ['defense-btn', 'defense-modal', 'mobile-move-controls'].forEach(id => {
+        const element = document.getElementById(id);
+        if (element) element.remove();
+    });
 }
 
 // Export functions for global usage
