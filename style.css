@@ -2810,3 +2810,368 @@ body .panel p {
   font-size: 12px;
   line-height: 20px;
 }
+
+@media (max-width: 700px) {
+  html,
+  body {
+    width: 100%;
+    min-height: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    touch-action: manipulation;
+  }
+
+  body .logo {
+    top: 14px;
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+
+  body .solar {
+    perspective: 520px;
+    transform: rotatex(-14deg);
+  }
+
+  body .solar_systm .planet {
+    width: min(118vw, 520px);
+    height: min(118vw, 520px);
+    border-radius: 50%;
+    bottom: -32vw;
+    background-size: auto 100% !important;
+    box-shadow: 0 -210px 90px black inset, 0 0 70px 18px rgba(255, 255, 255, 0.22) inset;
+  }
+
+  body .overlay {
+    width: 140vw;
+    height: 44vh;
+    left: -20vw;
+    top: -12vh;
+    border-bottom-width: 62vh;
+    box-shadow: 0 -90px 110px 44px black inset;
+  }
+
+  body label.menu {
+    left: auto;
+    right: auto;
+    top: auto !important;
+    bottom: 106px;
+    width: 44px;
+    height: 58px;
+    z-index: 30;
+    text-align: center;
+  }
+
+  body label.menu:nth-of-type(1) {
+    left: calc(50% - 176px);
+  }
+
+  body label.menu:nth-of-type(2) {
+    left: calc(50% - 132px);
+  }
+
+  body label.menu:nth-of-type(3) {
+    left: calc(50% - 88px);
+  }
+
+  body label.menu:nth-of-type(4) {
+    left: calc(50% - 44px);
+  }
+
+  body label.menu:nth-of-type(5) {
+    left: calc(50% + 0px);
+  }
+
+  body label.menu:nth-of-type(6) {
+    left: calc(50% + 44px);
+  }
+
+  body label.menu:nth-of-type(7) {
+    left: calc(50% + 88px);
+  }
+
+  body label.menu:nth-of-type(8) {
+    left: calc(50% + 132px);
+  }
+
+  body label.menu:nth-of-type(9) {
+    left: calc(50% + 176px);
+  }
+
+  body label.menu:after,
+  body input[type=radio][name=planet]:checked+label:before {
+    display: none !important;
+  }
+
+  body label.menu .preview {
+    width: 28px;
+    height: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  body label.menu .info {
+    left: 0;
+    top: 33px;
+    width: 44px;
+  }
+
+  body label.menu h2 {
+    font-size: 8px;
+    letter-spacing: 0;
+    opacity: 0.85;
+    white-space: nowrap;
+  }
+
+  body label.menu h2 .pip,
+  body label.menu h3 {
+    display: none;
+  }
+
+  body .solar_systm .planet_description {
+    width: calc(100vw - 32px);
+    top: -34vh;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  body .solar_systm .planet_description h2 {
+    margin-top: 0;
+    margin-bottom: 4px;
+    font-size: 9px;
+    letter-spacing: 3px;
+  }
+
+  body .solar_systm .planet_description h1 {
+    font-size: clamp(24px, 9vw, 38px);
+    letter-spacing: 6px;
+  }
+
+  body .solar_systm .planet_description p {
+    max-width: 360px;
+    margin: 10px auto 8px;
+    font-size: 10px;
+    line-height: 18px;
+    letter-spacing: 1.4px;
+  }
+
+  body .solar_systm .planet_description a {
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+
+  body .solar_systm .planet_description .explore-btn {
+    margin: 10px 0 !important;
+    padding: 9px 16px !important;
+    font-size: 10px !important;
+    letter-spacing: 1.5px !important;
+  }
+
+  body .read:checked+label {
+    width: 0;
+  }
+
+  body .read:checked+label+input+.panel {
+    right: 0;
+  }
+
+  body .panel {
+    right: -100vw;
+    width: 100vw;
+    height: 100dvh;
+    padding: 18px 22px 32px;
+    box-sizing: border-box;
+    z-index: 40;
+  }
+
+  body .panel h1 {
+    padding-top: 14px;
+    font-size: 22px;
+  }
+
+  body .panel p {
+    font-size: 13px;
+    line-height: 22px;
+  }
+
+  body label.closeBig {
+    z-index: 39;
+  }
+
+  body label.closeBig::after {
+    left: 16px;
+    right: auto;
+    top: 18px;
+    transform: none;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  body>button[onclick*="mywebar"] {
+    right: 12px !important;
+    bottom: 164px !important;
+    max-width: calc(100vw - 24px) !important;
+    padding: 10px 14px !important;
+    font-size: 10px !important;
+    letter-spacing: 1px !important;
+  }
+
+  #global-controls {
+    bottom: 14px !important;
+    left: 12px !important;
+    right: 12px !important;
+    transform: none !important;
+    display: grid !important;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  #global-controls button {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 12px 14px !important;
+    font-size: 12px !important;
+    letter-spacing: 1.4px !important;
+    box-sizing: border-box;
+  }
+
+  #satellite-container>div[style*="top:20px"] {
+    top: 12px !important;
+    left: 12px !important;
+    right: 12px !important;
+    gap: 10px !important;
+  }
+
+  #satellite-container>div[style*="bottom:40px"] {
+    bottom: 18px !important;
+    left: 12px !important;
+    right: 12px !important;
+    transform: none !important;
+  }
+
+  #satellite-planet-name {
+    font-size: 28px !important;
+    letter-spacing: 3px !important;
+  }
+
+  #satellite-land-btn,
+  #satellite-ar-btn,
+  #satellite-sat-ar-btn,
+  #satellite-attack-btn {
+    display: block !important;
+    width: 100% !important;
+    margin: 10px 0 0 !important;
+    padding: 12px 14px !important;
+    font-size: 12px !important;
+    letter-spacing: 1.5px !important;
+    box-sizing: border-box;
+  }
+
+  #satellite-sat-ar-btn[style*="display:none"] {
+    display: none !important;
+  }
+
+  #mission-modal {
+    width: calc(100vw - 32px) !important;
+    padding: 20px !important;
+    box-sizing: border-box;
+  }
+
+  #mission-complete-msg {
+    width: calc(100vw - 28px) !important;
+  }
+
+  #mission-result-text {
+    font-size: 24px !important;
+    letter-spacing: 2px !important;
+    padding: 16px !important;
+  }
+
+  #hud-layer>div:first-child {
+    top: 12px !important;
+    left: 12px !important;
+    right: 12px !important;
+    gap: 10px !important;
+  }
+
+  #hud-planet-name {
+    margin-left: 0 !important;
+    font-size: 18px !important;
+  }
+
+  #hud-layer>div[style*="right:20px"] {
+    top: 70px !important;
+    right: 12px !important;
+    font-size: 11px !important;
+  }
+
+  #controls-hint {
+    left: 12px !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    font-size: 10px !important;
+  }
+
+  #info-panel {
+    bottom: 56px !important;
+    width: calc(100vw - 24px) !important;
+    max-width: calc(100vw - 24px) !important;
+    padding: 16px !important;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 420px) {
+  body .solar_systm .planet_description {
+    top: -38vh;
+  }
+
+  body .solar_systm .planet_description p {
+    max-height: 72px;
+    overflow: hidden;
+  }
+
+  body label.menu {
+    bottom: 96px;
+    transform: scale(0.9);
+    transform-origin: center bottom;
+  }
+
+  body label.menu:nth-of-type(1) {
+    left: calc(50% - 153px);
+  }
+
+  body label.menu:nth-of-type(2) {
+    left: calc(50% - 119px);
+  }
+
+  body label.menu:nth-of-type(3) {
+    left: calc(50% - 85px);
+  }
+
+  body label.menu:nth-of-type(4) {
+    left: calc(50% - 51px);
+  }
+
+  body label.menu:nth-of-type(5) {
+    left: calc(50% - 17px);
+  }
+
+  body label.menu:nth-of-type(6) {
+    left: calc(50% + 17px);
+  }
+
+  body label.menu:nth-of-type(7) {
+    left: calc(50% + 51px);
+  }
+
+  body label.menu:nth-of-type(8) {
+    left: calc(50% + 85px);
+  }
+
+  body label.menu:nth-of-type(9) {
+    left: calc(50% + 119px);
+  }
+}
